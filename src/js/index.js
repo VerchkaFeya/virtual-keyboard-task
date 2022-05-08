@@ -255,7 +255,8 @@ const insertKeyValueOnClick = (e) => {
 window.addEventListener('keydown', (e) => {
   // console.log(`Key down: ${e.code} and ${e.key}`);
   textArea.focus();
-  document.querySelector(`.key[data-code="${e.code}"]`).classList.add('pressed');
+  // console.log(document.querySelector(`.key[data-code="${e.code}"]`));
+  keyboardContainer.querySelector(`.key[data-code="${e.code}"]`).classList.add('pressed');
   e.preventDefault();
 
   if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
@@ -267,7 +268,7 @@ window.addEventListener('keydown', (e) => {
 // вставка символов при отжатии клавиш
 window.addEventListener('keyup', (e) => {
   if (e.code !== 'CapsLock') {
-    document.querySelector(`.key[data-code="${e.code}"]`).classList.remove('pressed');
+    keyboardContainer.querySelector(`.key[data-code="${e.code}"]`).classList.remove('pressed');
   }
   if (e.code === 'CapsLock' && capsLock === false) {
     capsLock = true;
