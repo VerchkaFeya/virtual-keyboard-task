@@ -1,32 +1,32 @@
-import { keysDataEn } from "./KeysDataEn.js";
-import { keysDataRu } from "./KeysDataRu.js";
-import { functiionalKeys } from "./FunctionalKeys.js";
-import { arrowKeys } from "./FunctionalKeys.js";
+import { keysDataEn } from './KeysDataEn.js';
+import { keysDataRu } from './KeysDataRu.js';
+import { functiionalKeys } from './FunctionalKeys.js';
+import { arrowKeys } from './FunctionalKeys.js';
 
-const body = document.querySelector("body");
+const body = document.querySelector('body');
 
-let lang = "en";
+let lang = 'en';
 let capsLock = false;
 let shift = false;
 
 const generateTextArea = () => {
-  const title = document.createElement("h1");
-  title.classList.add("title");
-  title.innerHTML = "Virtual keyboard";
+  const title = document.createElement('h1');
+  title.classList.add('title');
+  title.innerHTML = 'Virtual keyboard';
 
-  const textField = document.createElement("div");
-  textField.classList.add("text-field");
+  const textField = document.createElement('div');
+  textField.classList.add('text-field');
 
-  const changeLang = document.createElement("p");
-  changeLang.classList.add("text-field__change-lang");
-  if (lang === "en") {
-    changeLang.innerHTML = "Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS";
+  const changeLang = document.createElement('p');
+  changeLang.classList.add('text-field__change-lang');
+  if (lang === 'en') {
+    changeLang.innerHTML = 'Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS';
   } else {
-    changeLang.innerHTML = "Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows";
+    changeLang.innerHTML = 'Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows';
   }
-  const textArea = document.createElement("textarea");
-  textArea.classList.add("text-field__textarea");
-  textArea.setAttribute("autofocus", "autofocus");
+  const textArea = document.createElement('textarea');
+  textArea.classList.add('text-field__textarea');
+  textArea.setAttribute('autofocus', 'autofocus');
   textField.appendChild(changeLang);
   textField.appendChild(textArea);
   body.appendChild(title);
@@ -34,12 +34,12 @@ const generateTextArea = () => {
 };
 
 const generateKeyboardArea = () => {
-  const keyboard = document.createElement("div");
-  keyboard.classList.add("keyboard");
+  const keyboard = document.createElement('div');
+  keyboard.classList.add('keyboard');
   body.append(keyboard);
 
-  const keyboardContainer = document.createElement("div");
-  keyboardContainer.classList.add("keyboard__keys-container");
+  const keyboardContainer = document.createElement('div');
+  keyboardContainer.classList.add('keyboard__keys-container');
   keyboard.append(keyboardContainer);
 };
 
@@ -55,8 +55,8 @@ class Key {
   }
 
   create() {
-    let key = document.createElement("div");
-    key.classList.add("key");
+    let key = document.createElement('div');
+    key.classList.add('key');
     key.dataset.code = `${this.code}`;
     key.dataset.shifted = `${this.shifted}`;
     key.dataset.value = `${this.value}`;
@@ -64,11 +64,11 @@ class Key {
     key.innerHTML = `${this.value}`;
 
     if (functiionalKeys.includes(`${this.code}`)) {
-      key.classList.add("func-key");
+      key.classList.add('func-key');
     }
 
     if (arrowKeys.includes(`${this.code}`)) {
-      key.classList.add("arrow-key");
+      key.classList.add('arrow-key');
     }
 
     return key;
@@ -78,8 +78,8 @@ class Key {
 const generateRows = (container) => {
   let i = 1;
   while (i <= 5) {
-    let row = document.createElement("div");
-    row.classList.add("keyboard__row", `row${i}`);
+    let row = document.createElement('div');
+    row.classList.add('keyboard__row', `row${i}`);
     container.appendChild(row);
     i += 1;
   }
@@ -96,23 +96,23 @@ const generateKeys = (keysData, rows) => {
 };
 
 // create rows for keyboard and keys
-const keyboardContainer = document.querySelector(".keyboard__keys-container");
+const keyboardContainer = document.querySelector('.keyboard__keys-container');
 generateRows(keyboardContainer);
-let rows = document.querySelectorAll(".keyboard__row");
+let rows = document.querySelectorAll('.keyboard__row');
 
 // генерация клавиш в зависимости от языка
-if (lang === "en") {
+if (lang === 'en') {
   generateKeys(keysDataEn, rows);
 } else {
   generateKeys(keysDataRu, rows);
 }
 
-const textArea = document.querySelector("textarea");
+const textArea = document.querySelector('textarea');
 
 // функция ищет и меняет всо содержимое клавиш на большие буквы и значения с шифтом
 const changeToUpperCase = () => {
-  document.querySelectorAll(".key").forEach(item => {
-    if (!item.classList.contains("arrow-key") && !item.classList.contains("func-key") && item.dataset.shifted !== "null") {
+  document.querySelectorAll('.key').forEach(item => {
+    if (!item.classList.contains('arrow-key') && !item.classList.contains('func-key') && item.dataset.shifted !== 'null') {
       let key = item;
       key.innerHTML = key.dataset.shifted;
     }
@@ -121,8 +121,8 @@ const changeToUpperCase = () => {
 
 // функция ищет и  меняет все содержимое клавиш на маленькие буквы и значения без шифта
 const changeToLowerCase = () => {
-  document.querySelectorAll(".key").forEach(item => {
-    if (!item.classList.contains("arrow-key") && !item.classList.contains("func-key") && item.dataset.shifted !== "null") {
+  document.querySelectorAll('.key').forEach(item => {
+    if (!item.classList.contains('arrow-key') && !item.classList.contains('func-key') && item.dataset.shifted !== 'null') {
       let key = item;
       key.innerHTML = key.dataset.value;
     }
@@ -131,9 +131,9 @@ const changeToLowerCase = () => {
 
 // функция ищет и меняет содержимое ТОЛЬКО буквенных клавиш на большие
 const changeToUpperCaseCapsLock = () => {
-  document.querySelectorAll(".key").forEach(item => {
+  document.querySelectorAll('.key').forEach(item => {
     let code = item.dataset.code;
-    if (code.indexOf("Key") !== -1) {
+    if (code.indexOf('Key') !== -1) {
       let key = item;
       key.innerHTML = key.innerHTML.toLocaleUpperCase();
     }
@@ -141,21 +141,21 @@ const changeToUpperCaseCapsLock = () => {
 };
 
 // функция вставляет значение клавиши в место где стоит курсор (не касается backspace, del, arrows)
-const insertKeyValue = (node, insertValue) => {
-  let text = node.value;
-  let cursor = node.selectionStart;
+const insertKeyValue = (insertValue) => {
+  let text = textArea.value;
+  let cursor = textArea.selectionStart;
   let chunk1 = text.slice(0, cursor);
   let chunk2 = text.slice(cursor);
   chunk1 += insertValue;
   text = chunk1 + chunk2;
-  node.value = text;
-  node.selectionStart = cursor + insertValue.length;
-  node.selectionEnd = cursor + insertValue.length;
+  textArea.value = text;
+  textArea.selectionStart = cursor + insertValue.length;
+  textArea.selectionEnd = cursor + insertValue.length;
 };
 
-const insertDeleteValue = (node) => {
-  let text = node.value;
-  let cursor = node.selectionStart;
+const insertDeleteValue = () => {
+  let text = textArea.value;
+  let cursor = textArea.selectionStart;
   let chunk1 = text.slice(0, cursor);
   let chunk2 = text.slice(cursor + 1);
   text = chunk1 + chunk2;
@@ -164,87 +164,87 @@ const insertDeleteValue = (node) => {
   textArea.selectionEnd = cursor;
 };
 
-const insertBackspaceValue = (node) => {
-  let text = node.value;
-  let cursor = node.selectionStart;
-  let endCursor = node.selectionEnd;
+const insertBackspaceValue = () => {
+  let text = textArea.value;
+  let cursor = textArea.selectionStart;
+  let endCursor = textArea.selectionEnd;
   if (cursor === endCursor) {
     let chunk1 = text.slice(0, cursor - 1);
     let chunk2 = text.slice(cursor);
     text = chunk1 + chunk2;
-    node.value = text;
-    node.selectionStart = cursor - 1;
-    node.selectionEnd = cursor - 1;
+    textArea.value = text;
+    textArea.selectionStart = cursor - 1;
+    textArea.selectionEnd = cursor - 1;
   }
 };
 
 const insertKeyValueOnClick = (e) => {
   let key = e.target;
-  if (key.classList.contains("key")) {
+  if (key.classList.contains('key')) {
     textArea.focus();
-    if (key.dataset.code.indexOf("Key") !== -1) {
-      console.log("letter clicked!");
+    if (key.dataset.code.indexOf('Key') !== -1) {
+      // console.log('letter clicked!');
       if (capsLock && !shift) {
-        insertKeyValue(textArea, `${key.dataset.shifted}`);
+        insertKeyValue(`${key.dataset.shifted}`);
       } else if (capsLock && shift) {
-        insertKeyValue(textArea, `${key.dataset.value}`);
+        insertKeyValue(`${key.dataset.value}`);
       } else if (!capsLock && shift) {
-        insertKeyValue(textArea, `${key.dataset.shifted}`);
+        insertKeyValue(`${key.dataset.shifted}`);
       } else if (!capsLock && !shift) {
-        insertKeyValue(textArea, `${key.dataset.value}`);
+        insertKeyValue(`${key.dataset.value}`);
       }
     }
-    if (!functiionalKeys.includes(key.dataset.code) && !arrowKeys.includes(key.dataset.code) && key.dataset.code.indexOf("Key") === -1) {
-      console.log("double value keys clicked!");
+    if (!functiionalKeys.includes(key.dataset.code) && !arrowKeys.includes(key.dataset.code) && key.dataset.code.indexOf('Key') === -1) {
+      // console.log('double value keys clicked!');
       if (capsLock && !shift) {
-        insertKeyValue(textArea, `${key.dataset.value}`);
+        insertKeyValue(`${key.dataset.value}`);
       } else if (capsLock && shift) {
-        insertKeyValue(textArea, `${key.dataset.shifted}`);
+        insertKeyValue(`${key.dataset.shifted}`);
       } else if (!capsLock && shift) {
-        insertKeyValue(textArea, `${key.dataset.shifted}`);
+        insertKeyValue(`${key.dataset.shifted}`);
       } else if (!capsLock && !shift) {
-        insertKeyValue(textArea, `${key.dataset.value}`);
+        insertKeyValue(`${key.dataset.value}`);
       }
     }
     if (arrowKeys.includes(key.dataset.code)) {
-      console.log("arrow cliked");
+      // console.log('arrow cliked');
       let cursor = textArea.selectionStart;
-      if (key.dataset.code === "ArrowLeft") {
+      if (key.dataset.code === 'ArrowLeft') {
         textArea.selectionStart = cursor - 1;
         textArea.selectionEnd = cursor - 1;
-      } else if (key.dataset.code === "ArrowRight") {
+      } else if (key.dataset.code === 'ArrowRight') {
         textArea.selectionStart = cursor + 1;
         textArea.selectionEnd = cursor + 1;
-      } else if (key.dataset.code === "ArrowUp") {
-        insertKeyValue(textArea, "↑");
-      } else if (key.dataset.code === "ArrowDown") {
-        insertKeyValue(textArea, "↓");
+      } else if (key.dataset.code === 'ArrowUp') {
+        insertKeyValue('↑');
+      } else if (key.dataset.code === 'ArrowDown') {
+        insertKeyValue('↓');
       }
     }
-    if (key.dataset.code === "Tab") {
-      insertKeyValue(textArea, "    ");
+    if (key.dataset.code === 'Tab') {
+      insertKeyValue('    ');
     }
-    if (key.dataset.code === "Delete") {
+    if (key.dataset.code === 'Delete') {
       insertDeleteValue(textArea);
     }
-    if (key.dataset.code === "Backspace") {
+    if (key.dataset.code === 'Backspace') {
       insertBackspaceValue(textArea);
     }
-    if (key.dataset.code === "Space") {
-      insertKeyValue(textArea, " ");
+    if (key.dataset.code === 'Space') {
+      insertKeyValue(' ');
     }
-    if (key.dataset.code === "Enter") {
-      insertKeyValue(textArea, "\n");
+    if (key.dataset.code === 'Enter') {
+      insertKeyValue('\n');
     }
-    if (key.dataset.code === "CapsLock") {
-      console.log("CAPS cliked");
+    if (key.dataset.code === 'CapsLock') {
+      // console.log('CAPS cliked');
       if (capsLock) {
         capsLock = false;
-        key.classList.remove("pressed");
+        key.classList.remove('pressed');
         changeToLowerCase();
       } else {
         capsLock = true;
-        key.classList.add("pressed");
+        key.classList.add('pressed');
         changeToUpperCaseCapsLock();
       }
     }
@@ -252,124 +252,128 @@ const insertKeyValueOnClick = (e) => {
 };
 
 // вставка символов при зажатии клавиш
-window.addEventListener("keydown", (e) => {
+window.addEventListener('keydown', (e) => {
   // console.log(`Key down: ${e.code} and ${e.key}`);
   textArea.focus();
-  document.querySelector(`.key[data-code="${e.code}"]`).classList.add("pressed");
+  document.querySelector(`.key[data-code="${e.code}"]`).classList.add('pressed');
   e.preventDefault();
 
-  if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
     shift = true;
     changeToUpperCase();
   }
 });
 
 // вставка символов при отжатии клавиш
-window.addEventListener("keyup", (e) => {
-  if (e.code !== "CapsLock") {
-    document.querySelector(`.key[data-code="${e.code}"]`).classList.remove("pressed");
+window.addEventListener('keyup', (e) => {
+  if (e.code !== 'CapsLock') {
+    document.querySelector(`.key[data-code="${e.code}"]`).classList.remove('pressed');
   }
-  if (e.code === "CapsLock" && capsLock === false) {
+  if (e.code === 'CapsLock' && capsLock === false) {
     capsLock = true;
     changeToUpperCaseCapsLock();
-  } else if (e.code === "CapsLock" && capsLock === true) {
+  } else if (e.code === 'CapsLock' && capsLock === true) {
     capsLock = false;
     changeToLowerCase();
-    document.querySelector(`.key[data-code="${e.code}"]`).classList.remove("pressed");
+    document.querySelector(`.key[data-code="${e.code}"]`).classList.remove('pressed');
   }
-  if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
     shift = false;
     changeToLowerCase();
   }
 
-  if (e.code.indexOf("Key") !== -1) {
+  if (e.code.indexOf('Key') !== -1) {
     let key = document.querySelector(`.key[data-code="${e.code}"]`);
     if (capsLock && !shift) {
-      console.log("caps pressed and shift unpressed");
-      insertKeyValue(textArea, `${key.dataset.shifted}`);
+      // console.log('caps pressed and shift unpressed');
+      insertKeyValue(`${key.dataset.shifted}`);
     } else if (capsLock && shift) {
-      insertKeyValue(textArea, `${key.dataset.value}`);
-      console.log("caps pressed and shift pressed");
+      insertKeyValue(`${key.dataset.value}`);
+      // console.log('caps pressed and shift pressed');
     } else if (!capsLock && shift) {
-      console.log("caps unpressed and shift pressed");
-      insertKeyValue(textArea, `${key.dataset.shifted}`);
+      // console.log('caps unpressed and shift pressed');
+      insertKeyValue(`${key.dataset.shifted}`);
     } else if (!capsLock && !shift) {
-      console.log("caps unpressed and shift unpressed");
-      insertKeyValue(textArea, `${key.dataset.value}`);
+      // console.log('caps unpressed and shift unpressed');
+      insertKeyValue(`${key.dataset.value}`);
     }
   }
 
-  if (!functiionalKeys.includes(e.code) && !arrowKeys.includes(e.code) && e.code.indexOf("Key") === -1) {
+  if (!functiionalKeys.includes(e.code) && !arrowKeys.includes(e.code) && e.code.indexOf('Key') === -1) {
     let key = document.querySelector(`.key[data-code="${e.code}"]`);
     if (capsLock && !shift) {
-      console.log("caps pressed and shift unpressed");
-      insertKeyValue(textArea, `${key.dataset.value}`);
+      // console.log('caps pressed and shift unpressed');
+      insertKeyValue(`${key.dataset.value}`);
     } else if (capsLock && shift) {
-      insertKeyValue(textArea, `${key.dataset.shifted}`);
-      console.log("caps pressed and shift pressed");
+      insertKeyValue(`${key.dataset.shifted}`);
+      // console.log('caps pressed and shift pressed');
     } else if (!capsLock && shift) {
-      console.log("caps unpressed and shift pressed");
-      insertKeyValue(textArea, `${key.dataset.shifted}`);
+      // console.log('caps unpressed and shift pressed');
+      insertKeyValue(`${key.dataset.shifted}`);
     } else if (!capsLock && !shift) {
-      console.log("caps unpressed and shift unpressed");
-      insertKeyValue(textArea, `${key.dataset.value}`);
+      // console.log('caps unpressed and shift unpressed');
+      insertKeyValue(`${key.dataset.value}`);
     }
   }
 
-  if (e.code === "Tab") {
-    insertKeyValue(textArea, "    ");
+  if (e.code === 'Tab') {
+    insertKeyValue('    ');
   }
-  if (e.code === "Delete") {
+  if (e.code === 'Delete') {
     insertDeleteValue(textArea);
   }
-  if (e.code === "Backspace") {
+  if (e.code === 'Backspace') {
     insertBackspaceValue(textArea);
   }
-  if (e.code === "Enter") {
-    insertKeyValue(textArea, "\n");
+  if (e.code === 'Enter') {
+    insertKeyValue('\n');
   }
-  if (e.code === "Space") {
-    insertKeyValue(textArea, " ");
+  if (e.code === 'Space') {
+    insertKeyValue(' ');
   }
-  if (e.code.indexOf("Arrow") !== -1) {
+  if (e.code.indexOf('Arrow') !== -1) {
     let cursor = textArea.selectionStart;
-    if (e.code === "ArrowLeft") {
+    if (e.code === 'ArrowLeft') {
       textArea.selectionStart = cursor - 1;
       textArea.selectionEnd = cursor - 1;
-    } else if (e.code === "ArrowRight") {
+    } else if (e.code === 'ArrowRight') {
       textArea.selectionStart = cursor + 1;
       textArea.selectionEnd = cursor + 1;
-    } else if (e.code === "ArrowUp") {
-      insertKeyValue(textArea, "↑");
-    } else if (e.code === "ArrowDown") {
-      insertKeyValue(textArea, "↓");
+    } else if (e.code === 'ArrowUp') {
+      insertKeyValue('↑');
+    } else if (e.code === 'ArrowDown') {
+      insertKeyValue('↓');
     }
   }
 });
 
 // window.addEventListener("keydown", (e) => {console.log(e.code); console.log(e.key)});
-window.addEventListener("click", insertKeyValueOnClick);
+window.addEventListener('click', insertKeyValueOnClick);
 
-// смена языка и генерация заново клавиатуры при зажатии клавиш шифт и альт
-document.addEventListener("keydown", function (event) {
+// функция смены языка и генерации новой клавиатуры при зажатии комбинации альт шифт
+
+const changeLangAndGenerateNewKeyboard = (event) => {
   if (event.shiftKey && event.altKey) {
-    console.log("CHANGE LANG");
-    console.log(lang);
-    if (lang === "en") {
-      lang = "ru";
+    // console.log('CHANGE LANG');
+    // console.log(lang);
+    if (lang === 'en') {
+      lang = 'ru';
     } else {
-      lang = "en";
+      lang = 'en';
     }
-    console.log(lang);
-    keyboardContainer.innerHTML = "";
+    // console.log(lang);
+    keyboardContainer.innerHTML = '';
     generateRows(keyboardContainer);
-    rows = document.querySelectorAll(".keyboard__row");
-    if (lang === "ru") {
+    rows = document.querySelectorAll('.keyboard__row');
+    if (lang === 'ru') {
       generateKeys(keysDataRu, rows);
-      document.querySelector(".text-field__change-lang").innerHTML = "Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows";
+      document.querySelector('.text-field__change-lang').innerHTML = 'Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows';
     } else {
       generateKeys(keysDataEn, rows);
-      document.querySelector(".text-field__change-lang").innerHTML = "Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS";
+      document.querySelector('.text-field__change-lang').innerHTML = 'Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS';
     }
   }
-});
+};
+
+// смена языка и генерация заново клавиатуры при зажатии клавиш шифт и альт
+document.addEventListener('keydown', changeLangAndGenerateNewKeyboard);
