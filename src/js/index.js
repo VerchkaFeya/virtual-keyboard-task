@@ -378,3 +378,27 @@ const changeLangAndGenerateNewKeyboard = (event) => {
 
 // смена языка и генерация заново клавиатуры при зажатии клавиш шифт и альт
 document.addEventListener('keydown', changeLangAndGenerateNewKeyboard);
+
+// LOCAL STORAGE
+const setLocalStorage = () => {
+  localStorage.setItem('lang', lang);
+};
+
+const getLocalStorage = () => {
+  if (localStorage.getItem('lang')) {
+    lang = localStorage.getItem('lang');
+    keyboardContainer.innerHTML = '';
+    generateRows(keyboardContainer);
+    rows = document.querySelectorAll('.keyboard__row');
+    if (lang === 'ru') {
+      generateKeys(keysDataRu, rows);
+      document.querySelector('.text-field__change-lang').innerHTML = 'Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows';
+    } else {
+      generateKeys(keysDataEn, rows);
+      document.querySelector('.text-field__change-lang').innerHTML = 'Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS';
+    }
+  }
+};
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
