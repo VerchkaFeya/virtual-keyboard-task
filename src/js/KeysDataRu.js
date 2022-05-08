@@ -364,8 +364,8 @@ export const keysDataRu = [
   },
   {
     code: 'Space',
-    value: "",
-    shifted: null,
+    value: " ",
+    shifted: " ",
     doubled: false
   },
   {
