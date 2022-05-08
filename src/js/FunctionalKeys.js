@@ -1,0 +1,2 @@
+export const functiionalKeys = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'AltRight', 'ControlRight'];
+export const arrowKeys = ['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp'];
