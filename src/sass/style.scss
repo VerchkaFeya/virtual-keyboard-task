@@ -105,7 +105,7 @@ body {
   font-weight: 600;
   padding: 0 5px;
   user-select: none;
-  transition: 0.05s;
+  transition: 0.2s;
 
   &:active {
     background-color: $color-active-yellow;
@@ -114,6 +114,7 @@ body {
   &.pressed {
     background-color: $color-active-yellow;
     color: $color-white;
+    transform: scale(0.95);
   }
 
   &.arrow-key {

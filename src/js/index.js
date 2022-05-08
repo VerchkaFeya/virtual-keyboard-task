@@ -251,6 +251,20 @@ const insertKeyValueOnClick = (e) => {
   }
 };
 
+const addPressedClassOnClick = (e) => {
+  let key = e.target;
+  if (key.classList.contains('key')) {
+    key.classList.add('pressed');
+  }
+};
+
+const removePressedClassOnClick = (e) => {
+  let key = e.target;
+  if (key.classList.contains('key')) {
+    key.classList.remove('pressed');
+  }
+};
+
 // вставка символов при зажатии клавиш
 window.addEventListener('keydown', (e) => {
   // console.log(`Key down: ${e.code} and ${e.key}`);
@@ -348,11 +362,16 @@ window.addEventListener('keyup', (e) => {
   }
 });
 
-// window.addEventListener("keydown", (e) => {console.log(e.code); console.log(e.key)});
+// вставка символов при клике по клавишам
 window.addEventListener('click', insertKeyValueOnClick);
 
-// функция смены языка и генерации новой клавиатуры при зажатии комбинации альт шифт
+// добавление классса кнопке при нажатии
+window.addEventListener('mousedown', addPressedClassOnClick);
 
+// удаление класса кнопке при отжатии
+window.addEventListener('mouseup', removePressedClassOnClick);
+
+// функция смены языка и генерации новой клавиатуры при зажатии комбинации альт шифт
 const changeLangAndGenerateNewKeyboard = (event) => {
   if (event.shiftKey && event.altKey) {
     // console.log('CHANGE LANG');
@@ -378,3 +397,27 @@ const changeLangAndGenerateNewKeyboard = (event) => {
 
 // смена языка и генерация заново клавиатуры при зажатии клавиш шифт и альт
 document.addEventListener('keydown', changeLangAndGenerateNewKeyboard);
+
+// LOCAL STORAGE
+const setLocalStorage = () => {
+  localStorage.setItem('lang', lang);
+};
+
+const getLocalStorage = () => {
+  if (localStorage.getItem('lang')) {
+    lang = localStorage.getItem('lang');
+    keyboardContainer.innerHTML = '';
+    generateRows(keyboardContainer);
+    rows = document.querySelectorAll('.keyboard__row');
+    if (lang === 'ru') {
+      generateKeys(keysDataRu, rows);
+      document.querySelector('.text-field__change-lang').innerHTML = 'Нажмите <span>Shift+Alt</span> для смены языка. \nТаск выполнен в ОС Windows';
+    } else {
+      generateKeys(keysDataEn, rows);
+      document.querySelector('.text-field__change-lang').innerHTML = 'Press <span>Shift+Alt</span> to change language. \nTask created in Windows OS';
+    }
+  }
+};
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
