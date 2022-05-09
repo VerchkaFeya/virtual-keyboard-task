@@ -1,0 +1,170 @@
+@import "base/myNormilize";
+@import "abstract/constants";
+
+body {
+  font-family: 'Noto Sans';
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  .title {
+    display: block;
+    padding: 20px;
+    font-family: 'Noto Sans';
+    font-size: 1.5rem;
+    line-height: 150%;
+    font-weight: 600;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+
+  .text-field {
+    color: #868686;
+    font-size: 0.875rem;
+    line-height: 150%;
+
+    &__textarea {
+      box-shadow: 0px 0px 5px 3px rgb(196 196 196 / 25%);
+      padding: 10px;
+      margin-top: 20px;
+      width: 500px;
+      height: 250px;
+      border-radius: 10px;
+    }
+
+    &__change-lang span {
+      color: #486595;
+      font-weight: 600;
+    }
+  }
+}
+
+.keyboard {
+  width: 730px;
+  height: 278px;
+  background-color: #F6F5F5;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 10px 3px #C4C4C4;
+
+  &__keys-container {
+    width: 698px;
+    height: 240px;
+    display: grid;
+    gap: 10px;
+  }
+
+  &__row {
+    display: grid;
+    height: 40px;
+    gap: 6px;
+    width: 100%;
+  }
+}
+
+
+.row1 {
+  grid-template-columns: repeat(13, 40px) 100px;  
+}
+
+.row2 {
+
+  grid-template-columns: 50px repeat(13, 40px) 44px;  
+}
+
+.row3 {
+  grid-template-columns: 100px repeat(11, 40px) 86px;  
+}
+
+.row4 {
+  grid-template-columns: 40px 100px repeat(14, 40px);  
+}
+
+.row5 {
+  grid-template-columns: 63px repeat(2, 40px) 283px 40px 64px repeat(3, 40px);  
+}
+
+
+.key {
+  background-color: $color-key;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0 5px;
+  user-select: none;
+  transition: 0.2s;
+
+  &:active {
+    background-color: $color-active-yellow;
+  }
+  
+  &.pressed {
+    background-color: $color-active-yellow;
+    color: $color-white;
+    transform: scale(0.95);
+  }
+
+  &.arrow-key {
+    background-color: $color-arrow-key;
+
+    &:active {
+      background-color: $color-active-yellow;
+      color: $color-white;
+    }
+
+    &.pressed {
+      background-color: $color-active-yellow;
+      color: $color-white;
+    }
+  }
+
+  &.func-key {
+    background-color: $color-func-key;
+    font-weight: 500;
+    color: $color-func-key-text;
+
+    &:active {
+      background-color: $color-active-yellow;
+      color: $color-white;
+    }
+    
+    &.pressed {
+      background-color: $color-active-yellow;
+      color: $color-white;
+    }
+
+  }
+  
+  &.doubled-key {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 13px;
+    gap: 3px;
+  }
+  
+  .shifted-key {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    color: #B7C5DC;
+    line-height: 100%;
+  }
+  
+  .unshifted-key {
+    align-self: flex-end;
+    line-height: 100%;
+  }
+}
